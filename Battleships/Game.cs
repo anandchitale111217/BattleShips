@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Battleships.Contract;
+using Battleships.Controller;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +22,10 @@ namespace Battleships
         // returns: the number of ships sunk by the set of guesses
         public static int Play(string[] ships, string[] guesses)
         {
-            return 0;
+            IGameController controller = new GameController(ships,guesses);
+            IShipController shipController = new ShipController();
+            IGuessController guessController = new GuessController();
+            return controller.Playgame(shipController, guessController);
         }
     }
 }
