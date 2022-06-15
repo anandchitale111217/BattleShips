@@ -10,12 +10,17 @@ namespace Battleships.Test
 {
     public class GameTest
     {
-        [Fact]
-        public void TestPlay()
+        [Theory]
+        [InlineData(new[] { "3:2,3:5" }, new[] { "7:0", "3:3" },0)]
+        [InlineData(new[] { "3:2,3:5" }, new[] { "3:2", "3:3","3:4","3:5" }, 1)]
+        [InlineData(new[] { "3:2,3:5", "3:6,3:8" }, new[] { "3:2", "3:3", "3:4", "3:5" , "3:6" , "3:7" , "3:8" }, 2)]
+        [InlineData(new[] { "3:2,3:5", "3:6,3:8" }, new[] { "3:2", "3:3", "3:4", "3:5", "3:6", "3:7", "3:9" }, 1)]
+        public void TestPlay(string[] tstships,string[] tstguesses , int sunkshipcount)
         {
-            var ships = new[] { "3:2,3:5" };
-            var guesses = new[] { "7:0", "3:3" };
-            Game.Play(ships, guesses).Should().Be(0);
+            //Unit test to prove the task.
+            var ships = tstships;
+            var guesses = tstguesses;
+            Game.Play(ships, guesses).Should().Be(sunkshipcount);
         }
     }
 }
